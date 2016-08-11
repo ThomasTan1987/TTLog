@@ -33,8 +33,12 @@ static TTLog *instance = nil;
     [format setDateFormat:@"MM-dd hh:mm:ss"];
     NSString *dateString = [format stringFromDate:[NSDate date]];
     NSString *logString = [[NSString alloc] initWithFormat:fmt arguments:args];
-    
     [self.logText appendFormat:@"[%@] %@\n",dateString,logString];
+    if (self.logView.superview) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.textView.text = self.logText;
+        });
+    }
     va_end(args);
 }
 - (void)showLog
@@ -64,17 +68,18 @@ static TTLog *instance = nil;
         [self.logView addSubview:btnReset];
         [btnReset addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
     }
+    self.textView.text = self.logText;
     [window addSubview:self.logView];
 }
 - (void)reset
 {
-    self.logText = nil;
+    self.logText = [[NSMutableString alloc] init];
     self.textView.text = @"";
 }
 - (void)close
 {
     [self.logView removeFromSuperview];
 }
-#pragma private 
+#pragma private
 
 @end

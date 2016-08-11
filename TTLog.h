@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#ifdef DEBUG
 #define LOG(...) [[TTLog sharedLog] log:__VA_ARGS__]
+#define SHOW_LOG [[TTLog sharedLog] showLog]
+#else
+#define LOG(...)
+#define SHOW_LOG
+#endif
 @interface TTLog : NSObject
 + (TTLog*)sharedLog;
 - (void)log:(NSString *)fmt,...;
