@@ -20,9 +20,16 @@ static TTLog *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[TTLog alloc] init];
-        instance.logText = [[NSMutableString alloc] init];
     });
     return instance;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _logText = [[NSMutableString alloc] init];
+    }
+    return self;
 }
 - (void)log:(NSString *)fmt,...
 {
