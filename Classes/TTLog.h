@@ -19,4 +19,5 @@
 - (void)log:(NSString *)fmt,...;
 - (void)showLog;
 - (void)close;
+- (BOOL)isShowLog;
 @end

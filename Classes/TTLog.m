@@ -41,30 +41,34 @@ static TTLog *instance = nil;
     }
     va_end(args);
 }
+- (BOOL)isShowLog
+{
+    if (self.logView && self.logView.superview) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 - (void)showLog
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     if (!self.logView) {
-        self.logView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.logView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 20)];
         [window addSubview:self.logView];
         
         UITextView *textView = [[UITextView alloc] initWithFrame:self.logView.bounds];
         self.textView = textView;
+        self.textView.textColor = [UIColor whiteColor];
+        self.textView.backgroundColor = [UIColor blackColor];
         textView.text = self.logText;
         [self.logView addSubview:textView];
         textView.editable = NO;
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"关闭" forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor grayColor];
-        button.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 50, 50, 30);
-        [self.logView addSubview:button];
-        [button addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *btnReset = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnReset setTitle:@"清除" forState:UIControlStateNormal];
         btnReset.backgroundColor = [UIColor grayColor];
-        btnReset.frame = CGRectMake(100, [UIScreen mainScreen].bounds.size.height - 50, 50, 30);
+        btnReset.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 30, 50, 30);
         [self.logView addSubview:btnReset];
         [btnReset addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
     }

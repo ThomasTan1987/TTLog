@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TTLog'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = '显示日志功能'
 
 # This description is used to generate tags and improve search results.
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
   日志功能，在界面上显示一个按钮，实时查看日志。
                        DESC
 
-  s.homepage         = 'https://github.com/ThoamsTan1987/TTLog'
+  s.homepage         = 'https://github.com/ThomasTan1987/TTLog'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ThoamsTan' => 'thomastan@vipabc.com' }
-  s.source           = { :git => 'https://github.com/ThoamsTan1987/TTLog.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/ThomasTan1987/TTLog.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
