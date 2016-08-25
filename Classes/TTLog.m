@@ -60,7 +60,7 @@ static TTLog *instance = nil;
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     if (!self.logView) {
-        self.logView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 20)];
+        self.logView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         [window addSubview:self.logView];
         
         UITextView *textView = [[UITextView alloc] initWithFrame:self.logView.bounds];
@@ -75,7 +75,7 @@ static TTLog *instance = nil;
         UIButton *btnReset = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnReset setTitle:@"清除" forState:UIControlStateNormal];
         btnReset.backgroundColor = [UIColor grayColor];
-        btnReset.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 30, 50, 30);
+        btnReset.frame = CGRectMake(0, self.logView.bounds.size.height - 30, 50, 30);
         [self.logView addSubview:btnReset];
         [btnReset addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
     }
