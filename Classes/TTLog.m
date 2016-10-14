@@ -31,22 +31,25 @@ static TTLog *instance = nil;
     }
     return self;
 }
+
 - (void)log:(NSString *)fmt,...
 {
-    va_list args;
-    va_start(args, fmt);
-    //写到文件
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"MM-dd hh:mm:ss"];
-    NSString *dateString = [format stringFromDate:[NSDate date]];
-    NSString *logString = [[NSString alloc] initWithFormat:fmt arguments:args];
-    [self.logText appendFormat:@"[%@] %@\n",dateString,logString];
-    if (self.logView.superview) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.textView.text = self.logText;
-        });
+    if (self.enableLog) {
+        va_list args;
+        va_start(args, fmt);
+        //写到文件
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"MM-dd hh:mm:ss"];
+        NSString *dateString = [format stringFromDate:[NSDate date]];
+        NSString *logString = [[NSString alloc] initWithFormat:fmt arguments:args];
+        [self.logText appendFormat:@"[%@] %@\n",dateString,logString];
+        if (self.logView.superview) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.textView.text = self.logText;
+            });
+        }
+        va_end(args);
     }
-    va_end(args);
 }
 - (BOOL)isShowLog
 {
@@ -56,7 +59,7 @@ static TTLog *instance = nil;
         return NO;
     }
 }
-- (void)showLog
+- (void)showLogView
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     if (!self.logView) {
@@ -87,7 +90,7 @@ static TTLog *instance = nil;
     self.logText = [[NSMutableString alloc] init];
     self.textView.text = @"";
 }
-- (void)close
+- (void)hideLogView
 {
     [self.logView removeFromSuperview];
 }
