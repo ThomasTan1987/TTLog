@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TTLog'
-  s.version          = '0.1.5'
-  s.summary          = '显示日志功能'
+  s.version          = '0.2.0'
+  s.summary          = '记录日志功能'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  日志功能，在界面上显示一个按钮，实时查看日志。
+  将日志写到文件，不再有界面显示功能
                        DESC
 
   s.homepage         = 'https://github.com/ThomasTan1987/TTLog'
