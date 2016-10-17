@@ -30,9 +30,10 @@ static TTLog *instance = nil;
 }
 - (NSString *)path
 {
-    if (_path) {
+    if (!_path) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         _path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"vipa_debug.log"];
+        [[[NSFileManager alloc] init] createFileAtPath:_path contents:nil attributes:nil];
     }
     return _path;
 }
@@ -54,6 +55,7 @@ static TTLog *instance = nil;
         
         
         [fileHandle writeData:[[NSString stringWithFormat:@"[%@] %@\n",dateString,logString] dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
         va_end(args);
     }
 }
