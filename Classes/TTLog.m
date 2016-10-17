@@ -25,6 +25,9 @@ static TTLog *instance = nil;
     self = [super init];
     if (self) {
         self.maxSize = 1024 * 1024;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:self.path]) {
+            [[NSFileManager defaultManager] createFileAtPath:self.path contents:nil attributes:nil];
+        }
     }
     return self;
 }
@@ -33,7 +36,7 @@ static TTLog *instance = nil;
     if (!_path) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         _path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"vipa_debug.log"];
-        [[[NSFileManager alloc] init] createFileAtPath:_path contents:nil attributes:nil];
+        
     }
     return _path;
 }
